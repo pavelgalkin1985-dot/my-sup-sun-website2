@@ -1,0 +1,30 @@
+{
+  "name": "my-sup-sun-website2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavelgalkin1985-dot/my-sup-sun-website2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/pavelgalkin1985-dot/my-sup-sun-website2/issues"
+  },
+  "homepage": "https://github.com/pavelgalkin1985-dot/my-sup-sun-website2#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.12",
+    "tailwindcss": "^3.4.17",
+    "vite": "^8.0.10"
+  }
+}

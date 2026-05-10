@@ -16,174 +16,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&family=Unbounded:wght@300;500;700;900&display=swap" rel="stylesheet">
     
-    <!-- Подключение иконок и Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Подключение иконок и стилей -->
+    <link href="./src/style.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Manrope', 'sans-serif'],
-                        display: ['Unbounded', 'sans-serif'], 
-                    },
-                    colors: {
-                        ocean: {
-                            deep: '#010A15',    
-                            mid: '#041E3A',     
-                            surface: '#0055FF', 
-                            cyan: '#00F0FF',    
-                        },
-                        sun: {
-                            glow: '#FFD700',
-                            core: '#FFF5D1'
-                        }
-                    },
-                    animation: {
-                        'float': 'float 8s ease-in-out infinite',
-                        'bubble': 'bubble 15s linear infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'pulse-icon': 'pulseIcon 2s infinite',
-                        'sunset': 'sunset 6s ease-in-out infinite alternate',
-                        'sunset-reflection': 'sunsetReflection 6s ease-in-out infinite alternate',
-                        'ripple': 'ripple 4s linear infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0) translateX(0)' },
-                            '50%': { transform: 'translateY(-15px) translateX(5px)' },
-                        },
-                        bubble: {
-                            '0%': { transform: 'translateY(100vh) scale(0)', opacity: '0' },
-                            '10%': { opacity: '0.6' },
-                            '90%': { opacity: '0.6' },
-                            '100%': { transform: 'translateY(-100px) scale(1.5)', opacity: '0' },
-                        },
-                        pulseIcon: {
-                            '0%, 100%': { transform: 'scale(1)', opacity: '1' },
-                            '50%': { transform: 'scale(1.2)', opacity: '0.8', color: '#00F0FF' },
-                        },
-                        sunset: {
-                            '0%': { transform: 'translateY(-30px) scale(1)', backgroundColor: '#FFD700', boxShadow: '0 0 40px #FFD700' },
-                            '100%': { transform: 'translateY(40px) scale(0.9)', backgroundColor: '#FF3300', boxShadow: '0 0 50px #FF3300' },
-                        },
-                        sunsetReflection: {
-                            '0%': { opacity: '0.8', width: '40px', backgroundColor: '#FFD700' },
-                            '100%': { opacity: '0.2', width: '15px', backgroundColor: '#FF3300' },
-                        },
-                        ripple: {
-                            '0%': { transform: 'scale(0.8)', opacity: '1', borderWidth: '2px' },
-                            '100%': { transform: 'scale(2.5)', opacity: '0', borderWidth: '0px' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        :root {
-            --depth: 0; 
-        }
-
-        body {
-            background-color: #010A15;
-            color: #e5e7eb;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Динамический фон погружения */
-        .ocean-bg {
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(180deg, #041E3A 0%, #010A15 100%);
-            z-index: -3;
-        }
-        
-        /* Темный оверлей */
-        .depth-overlay {
-            position: fixed;
-            inset: 0;
-            background: #00040A;
-            opacity: calc(var(--depth) * 0.95);
-            z-index: -2;
-            pointer-events: none;
-            transition: opacity 0.1s linear;
-        }
-
-        /* Эффект преломления света (Caustics) сверху */
-        .sun-rays {
-            position: fixed;
-            top: -20%; left: -20%; right: -20%; height: 70vh;
-            background: radial-gradient(ellipse at top, rgba(0, 240, 255, 0.15) 0%, rgba(255, 215, 0, 0.05) 40%, transparent 70%);
-            z-index: -1;
-            pointer-events: none;
-            opacity: calc(1 - var(--depth) * 1.5); 
-            mix-blend-mode: screen;
-            animation: float 10s ease-in-out infinite alternate;
-        }
-
-        /* Премиальное водное стекло */
-        .glass-water {
-            background: rgba(255, 255, 255, 0.015);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-top: 1px solid rgba(255, 255, 255, 0.1); 
-            border-left: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 10, 30, 0.3), inset 0 0 20px rgba(0, 240, 255, 0.02);
-            transition: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        .glass-water:hover {
-            background: rgba(255, 255, 255, 0.03);
-            border-color: rgba(0, 240, 255, 0.15);
-            box-shadow: 0 15px 40px 0 rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 240, 255, 0.05);
-            transform: translateY(-5px);
-        }
-
-        /* Текстовые градиенты */
-        .text-gradient-sun {
-            background: linear-gradient(135deg, #FFF5D1 0%, #FFD700 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .text-gradient-abyss {
-            background: linear-gradient(to right, #ffffff, #00F0FF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Анимация появления */
-        .reveal {
-            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-        .reveal-hidden {
-            opacity: 0;
-            transform: translateY(30px) scale(0.98);
-        }
-
-        /* Пузырьки */
-        .bubbles-container {
-            position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
-        }
-        .bubble {
-            position: absolute;
-            bottom: -20px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.1) 60%, transparent 100%);
-            box-shadow: inset 0 0 10px rgba(255,255,255,0.2), 0 0 10px rgba(0,240,255,0.1);
-            animation: bubble linear infinite;
-        }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #010A15; }
-        ::-webkit-scrollbar-thumb { background: #00F0FF; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #FFD700; }
-    </style>
 </head>
 <body class="font-sans antialiased selection:bg-ocean-cyan selection:text-ocean-deep" id="body">
 
@@ -254,10 +89,25 @@
 
     <!-- Главный экран (Hero) -->
     <section class="relative min-h-[100svh] flex flex-col items-center justify-center pt-24 overflow-hidden">
-        <!-- Глубокий океанский фон (чистый CSS, без изображений) -->
-        <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-ocean-mid/40 via-ocean-deep to-ocean-deep animate-[float_20s_infinite_alternate]"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-ocean-deep/80 to-ocean-deep"></div>
+        <!-- Премиальный видео-фон -->
+        <div class="absolute inset-0 z-0 overflow-hidden bg-ocean-deep">
+            <video 
+                autoplay 
+                muted 
+                loop 
+                playsinline 
+                preload="metadata"
+                aria-hidden="true"
+                poster="./public/images/hero_bg.png"
+                class="absolute inset-0 w-full h-full object-cover"
+                style="pointer-events: none; opacity: 0.85;"
+            >
+                <source src="./public/videos/Seaside_hotel_video_202604211944.mp4" type="video/mp4">
+            </video>
+            <!-- Premium Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-ocean-deep/40 via-ocean-deep/60 to-ocean-deep pointer-events-none"></div>
+            <!-- Мягкая виньетка -->
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(4,11,20,0.7)_100%)] pointer-events-none"></div>
         </div>
 
         <div class="relative z-10 w-full px-4 max-w-5xl mx-auto flex flex-col items-center justify-center text-center mt-6 md:mt-0">
@@ -283,24 +133,37 @@
                 </span>
             </div>
 
-            <!-- Уменьшенный, идеально отцентрированный заголовок -->
-            <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black text-white mb-2 leading-[1.1] uppercase tracking-tight drop-shadow-2xl">
-                Лазаревское<span class="text-ocean-cyan">.</span>
+            <h1 class="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-[1.2] uppercase tracking-tight drop-shadow-2xl max-w-4xl mx-auto">
+                SUP-прогулки в Лазаревском <br class="hidden md:block">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-sun-core to-sun-glow">на рассвете, закате</span> <br class="hidden md:block">
+                и в самый красивый момент моря
             </h1>
             
-            <div class="font-sans text-xs sm:text-sm md:text-base text-transparent bg-clip-text bg-gradient-to-r from-sun-core to-sun-glow uppercase tracking-[0.3em] md:tracking-[0.5em] font-light mb-10 drop-shadow-sm ml-1 md:ml-2">
-                Чёрное Море. Твой Маршрут
-            </div>
-            
-            <p class="text-sm md:text-base text-gray-400 mb-12 font-light max-w-md mx-auto leading-relaxed drop-shadow-md">
-                Атмосферные SUP-прогулки на рассвете и закате в Лазаревском. Отдых с полным погружением в природу.
+            <p class="text-sm md:text-base text-gray-300 mb-12 font-light max-w-2xl mx-auto leading-relaxed drop-shadow-md opacity-90">
+                <strong class="font-display text-white tracking-widest text-xs uppercase">MY SUP SUN</strong> — прогулки на сапах, обучение, прокат, SUP-йога и фотосъёмка на воде. Спокойный маршрут, инструктор рядом и атмосфера Чёрного моря, которую хочется сохранить.
             </p>
             
-            <div class="flex justify-center items-center">
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 w-full max-w-2xl mx-auto">
                 <a href="#tours" class="relative group w-full sm:w-auto sound-hover">
                     <div class="absolute inset-0 bg-gradient-to-r from-ocean-cyan to-ocean-surface rounded-full blur opacity-30 group-hover:opacity-60 transition duration-700"></div>
-                    <div class="relative bg-white/5 backdrop-blur-xl border border-white/20 text-white px-12 py-5 rounded-full font-display font-bold text-xs tracking-[0.2em] uppercase group-hover:bg-white group-hover:text-ocean-deep transition-all duration-500 block text-center shadow-xl">
-                        Выбрать маршрут
+                    <div class="relative bg-white/5 backdrop-blur-xl border border-white/20 text-white px-8 py-4 md:px-10 md:py-5 rounded-full font-display font-bold text-xs tracking-[0.2em] uppercase group-hover:bg-white group-hover:text-ocean-deep transition-all duration-500 block text-center shadow-xl">
+                        Выбрать прогулку
+                    </div>
+                </a>
+                
+                <a href="https://t.me/pavel_galkin_lab" target="_blank" class="relative group w-full sm:w-auto sound-hover">
+                    <div class="absolute inset-0 bg-[#2AABEE] rounded-full blur opacity-20 group-hover:opacity-40 transition duration-700"></div>
+                    <div class="relative bg-white/5 backdrop-blur-xl border border-white/10 text-white px-8 py-4 md:px-8 md:py-5 rounded-full font-display font-bold text-xs tracking-[0.1em] uppercase hover:border-[#2AABEE] transition-all duration-500 flex items-center justify-center gap-3">
+                        <i class="fa-brands fa-telegram text-lg text-[#2AABEE]"></i>
+                        Telegram
+                    </div>
+                </a>
+
+                <a href="tel:+79636928378" class="relative group w-full sm:w-auto sound-hover">
+                    <div class="absolute inset-0 bg-white rounded-full blur opacity-10 group-hover:opacity-20 transition duration-700"></div>
+                    <div class="relative bg-white/5 backdrop-blur-xl border border-white/10 text-white px-8 py-4 md:px-8 md:py-5 rounded-full font-display font-bold text-xs tracking-[0.1em] uppercase hover:border-white transition-all duration-500 flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-phone text-sm"></i>
+                        Позвонить
                     </div>
                 </a>
             </div>
@@ -430,37 +293,41 @@
     <section id="services" class="py-20 lg:py-32 relative z-10 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-16 md:mb-24 reveal text-center">
-                <h2 class="font-display text-4xl sm:text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tight">Услуги <br><span class="text-white/20">Проката</span></h2>
+                <h2 class="font-display text-4xl sm:text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tight">Форматы <br><span class="text-white/20">Отдыха</span></h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-transparent via-ocean-cyan to-transparent mx-auto"></div>
+                <p class="text-gray-400 mt-6 max-w-2xl mx-auto font-light">Прокат, занятия с инструктором, утренние и вечерние прогулки. Подходит для детей и взрослых.</p>
+                <a href="./public/images/services_poster.png" target="_blank" class="inline-flex items-center gap-2 mt-6 text-xs text-ocean-cyan uppercase tracking-widest font-bold hover:text-white transition-colors">
+                    <i class="fa-regular fa-image"></i> Открыть афишу услуг
+                </a>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Обучение -->
-                <div class="glass-water p-8 md:p-10 rounded-[2rem] reveal flex flex-col group hover:-translate-y-4 transition-transform duration-700 sound-hover">
-                    <div class="text-ocean-cyan text-4xl mb-6 opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"><i class="fa-solid fa-compass"></i></div>
-                    <h3 class="font-display text-2xl font-bold text-white mb-2 uppercase">Обучение</h3>
-                    <div class="font-display text-3xl font-black text-white mb-6">2000 ₽ <span class="text-xs font-normal text-gray-500 font-sans tracking-widest uppercase">/ час</span></div>
-                    <p class="text-gray-400 font-light mb-8 flex-grow text-sm">С инструктором с нуля. Ставим технику, ловим баланс (для взрослых и детей от 7 лет).</p>
-                    <button class="w-full bg-white/5 border border-white/10 text-white py-4 rounded-full font-bold group-hover:bg-ocean-cyan group-hover:text-ocean-deep group-hover:border-ocean-cyan transition-all tracking-[0.2em] uppercase text-xs">Выбрать</button>
-                </div>
-
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Прокат (Хит) -->
-                <div class="glass-water p-8 md:p-10 rounded-[2rem] reveal flex flex-col relative transform md:-translate-y-8 border-ocean-cyan/20 shadow-[0_0_30px_rgba(0,240,255,0.05)] group hover:-translate-y-12 transition-transform duration-700 z-10 sound-hover" style="background: rgba(0, 240, 255, 0.02);">
+                <div class="glass-water p-8 md:p-10 rounded-[2rem] reveal flex flex-col relative transform lg:-translate-y-8 border-ocean-cyan/20 shadow-[0_0_30px_rgba(0,240,255,0.05)] group hover:-translate-y-4 lg:hover:-translate-y-12 transition-transform duration-700 z-10 sound-hover" style="background: rgba(0, 240, 255, 0.02);">
                     <div class="absolute top-6 right-6 bg-ocean-cyan text-ocean-deep px-4 py-1.5 rounded-full text-[9px] font-black tracking-[0.3em] uppercase shadow-[0_0_15px_rgba(0,240,255,0.3)]">Хит</div>
                     <div class="text-white text-4xl mb-6 drop-shadow-lg group-hover:scale-110 transition-transform duration-500"><i class="fa-solid fa-water"></i></div>
-                    <h3 class="font-display text-2xl font-bold text-white mb-2 uppercase">Свободная Аренда</h3>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2 uppercase">Прокат SUP-досок</h3>
                     <div class="font-display text-3xl font-black text-ocean-cyan mb-6">от 600 ₽ <span class="text-xs font-normal text-gray-400 font-sans tracking-widest uppercase">/ час</span></div>
                     <p class="text-gray-300 font-light mb-8 flex-grow text-sm">Катание в своем темпе по акватории пляжа. Доступна доска на двоих.</p>
                     <button class="w-full bg-ocean-cyan text-ocean-deep py-4 rounded-full font-black tracking-[0.2em] uppercase text-xs shadow-[0_0_20px_rgba(0,240,255,0.2)] hover:bg-white transition-colors duration-500">Арендовать</button>
                 </div>
 
-                <!-- Абонементы -->
-                <div class="glass-water p-8 md:p-10 rounded-[2rem] reveal flex flex-col group hover:-translate-y-4 transition-transform duration-700 md:col-span-3 lg:col-span-1 sound-hover">
-                    <div class="text-[#0055FF] text-4xl mb-6 opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"><i class="fa-solid fa-ticket"></i></div>
-                    <h3 class="font-display text-2xl font-bold text-white mb-2 uppercase">Абонементы</h3>
-                    <div class="font-display text-3xl font-black text-white mb-6">5 / 7 <span class="text-xs font-normal text-gray-500 font-sans tracking-widest uppercase">занятий</span></div>
-                    <p class="text-gray-400 font-light mb-8 flex-grow text-sm">Курс прокачки тела в отпуске. Есть стильные подарочные сертификаты.</p>
-                    <button class="w-full bg-white/5 border border-white/10 text-white py-4 rounded-full font-bold group-hover:bg-[#0055FF] group-hover:border-[#0055FF] transition-all tracking-[0.2em] uppercase text-xs">Цены</button>
+                <!-- Обучение -->
+                <div class="glass-water p-8 md:p-10 rounded-[2rem] reveal flex flex-col group hover:-translate-y-4 transition-transform duration-700 sound-hover">
+                    <div class="text-[#FFD700] text-4xl mb-6 opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"><i class="fa-solid fa-compass"></i></div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2 uppercase">С инструктором</h3>
+                    <div class="font-display text-3xl font-black text-white mb-6">2000 ₽ <span class="text-xs font-normal text-gray-500 font-sans tracking-widest uppercase">/ час</span></div>
+                    <p class="text-gray-400 font-light mb-8 flex-grow text-sm">Обучение с нуля. Ставим технику, ловим баланс (для взрослых и детей от 7 лет).</p>
+                    <button class="w-full bg-white/5 border border-white/10 text-white py-4 rounded-full font-bold group-hover:bg-[#FFD700] group-hover:text-ocean-deep group-hover:border-[#FFD700] transition-all tracking-[0.2em] uppercase text-xs">Выбрать</button>
+                </div>
+
+                <!-- Сертификаты -->
+                <div class="glass-water p-8 md:p-10 rounded-[2rem] reveal flex flex-col group hover:-translate-y-4 transition-transform duration-700 sound-hover">
+                    <div class="text-[#0055FF] text-4xl mb-6 opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"><i class="fa-solid fa-gift"></i></div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2 uppercase">Сертификаты</h3>
+                    <div class="font-display text-xl font-black text-white mb-6">Подарочный <br>формат</div>
+                    <p class="text-gray-400 font-light mb-8 flex-grow text-sm">Премиальные подарочные сертификаты на любой формат отдыха.</p>
+                    <button class="w-full bg-white/5 border border-white/10 text-white py-4 rounded-full font-bold group-hover:bg-[#0055FF] group-hover:text-white group-hover:border-[#0055FF] transition-all tracking-[0.2em] uppercase text-xs">Заказать</button>
                 </div>
             </div>
         </div>
@@ -507,31 +374,80 @@
     <section id="safety" class="py-20 lg:py-32 relative z-10 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 md:mb-24 reveal">
-                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Протоколы <br>безопасности</h2>
-                <div class="w-16 h-1 bg-white/20 mx-auto mt-6 rounded-full"></div>
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Безопасность <br><span class="text-white/20">на воде</span></h2>
+                <div class="w-16 h-1 bg-white/20 mx-auto mt-6 rounded-full mb-8"></div>
+                <a href="./public/images/safety_poster.png" target="_blank" class="inline-flex items-center gap-2 text-xs text-ocean-cyan uppercase tracking-widest font-bold hover:text-white transition-colors">
+                    <i class="fa-regular fa-file-image"></i> Открыть памятку
+                </a>
             </div>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass-water p-8 rounded-2xl text-center reveal group hover:-translate-y-2 border-t-0 hover:border-t-2 hover:border-t-ocean-cyan transition-all duration-500 sound-hover">
-                    <div class="text-ocean-cyan text-3xl mb-4 group-hover:scale-110 transition-transform"><i class="fa-solid fa-life-ring"></i></div>
-                    <h4 class="font-display font-bold text-white mb-2 text-xs uppercase tracking-widest">Жилеты</h4>
-                    <p class="text-gray-400 font-light text-xs">Обязательная экипировка.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+                <!-- Карточка 1 -->
+                <div class="glass-water p-6 rounded-2xl flex items-start gap-4 reveal sound-hover">
+                    <i class="fa-solid fa-life-ring text-ocean-cyan text-2xl mt-1"></i>
+                    <div>
+                        <h4 class="font-display font-bold text-white text-sm uppercase mb-1">Наденьте жилет</h4>
+                        <p class="text-gray-400 font-light text-xs">Обязательная экипировка на воде.</p>
+                    </div>
                 </div>
-                <div class="glass-water p-8 rounded-2xl text-center reveal group hover:-translate-y-2 border-t-0 hover:border-t-2 hover:border-t-ocean-cyan transition-all duration-500 sound-hover" style="transition-delay: 100ms;">
-                    <div class="text-ocean-cyan text-3xl mb-4 group-hover:scale-110 transition-transform"><i class="fa-solid fa-link"></i></div>
-                    <h4 class="font-display font-bold text-white mb-2 text-xs uppercase tracking-widest">Лиш (Трос)</h4>
-                    <p class="text-gray-400 font-light text-xs">Доска не уплывет от вас.</p>
+                <!-- Карточка 2 -->
+                <div class="glass-water p-6 rounded-2xl flex items-start gap-4 reveal sound-hover" style="transition-delay: 50ms;">
+                    <i class="fa-solid fa-link text-ocean-cyan text-2xl mt-1"></i>
+                    <div>
+                        <h4 class="font-display font-bold text-white text-sm uppercase mb-1">Пристегните лиш</h4>
+                        <p class="text-gray-400 font-light text-xs">Чтобы доска не уплыла от вас.</p>
+                    </div>
                 </div>
-                <div class="glass-water p-8 rounded-2xl text-center reveal group hover:-translate-y-2 border-t-0 hover:border-t-2 hover:border-t-ocean-cyan transition-all duration-500 sound-hover" style="transition-delay: 200ms;">
-                    <div class="text-ocean-cyan text-3xl mb-4 group-hover:scale-110 transition-transform"><i class="fa-solid fa-satellite-dish"></i></div>
-                    <h4 class="font-display font-bold text-white mb-2 text-xs uppercase tracking-widest">Метео-контроль</h4>
-                    <p class="text-gray-400 font-light text-xs">Анализ погоды.</p>
+                <!-- Карточка 3 -->
+                <div class="glass-water p-6 rounded-2xl flex items-start gap-4 reveal sound-hover" style="transition-delay: 100ms;">
+                    <i class="fa-solid fa-cloud-sun text-ocean-cyan text-2xl mt-1"></i>
+                    <div>
+                        <h4 class="font-display font-bold text-white text-sm uppercase mb-1">Проверьте погоду</h4>
+                        <p class="text-gray-400 font-light text-xs">При ухудшении сразу к берегу.</p>
+                    </div>
                 </div>
-                <div class="glass-water p-8 rounded-2xl text-center reveal group hover:-translate-y-2 border-t-0 hover:border-t-2 hover:border-t-ocean-cyan transition-all duration-500 sound-hover" style="transition-delay: 300ms;">
-                    <div class="text-ocean-cyan text-3xl mb-4 group-hover:scale-110 transition-transform"><i class="fa-solid fa-user-shield"></i></div>
-                    <h4 class="font-display font-bold text-white mb-2 text-xs uppercase tracking-widest">Гид на воде</h4>
-                    <p class="text-gray-400 font-light text-xs">Инструктор всегда рядом.</p>
+                <!-- Карточка 4 -->
+                <div class="glass-water p-6 rounded-2xl flex items-start gap-4 reveal sound-hover" style="transition-delay: 150ms;">
+                    <i class="fa-solid fa-magnifying-glass text-ocean-cyan text-2xl mt-1"></i>
+                    <div>
+                        <h4 class="font-display font-bold text-white text-sm uppercase mb-1">Снаряжение</h4>
+                        <p class="text-gray-400 font-light text-xs">Осмотрите весло и доску.</p>
+                    </div>
                 </div>
+                <!-- Карточка 5 -->
+                <div class="glass-water p-6 rounded-2xl flex items-start gap-4 reveal sound-hover" style="transition-delay: 200ms;">
+                    <i class="fa-solid fa-map-location-dot text-ocean-cyan text-2xl mt-1"></i>
+                    <div>
+                        <h4 class="font-display font-bold text-white text-sm uppercase mb-1">Маршрут</h4>
+                        <p class="text-gray-400 font-light text-xs">Сообщите, куда плывете.</p>
+                    </div>
+                </div>
+                <!-- Карточка 6 -->
+                <div class="glass-water p-6 rounded-2xl flex items-start gap-4 reveal sound-hover" style="transition-delay: 250ms;">
+                    <i class="fa-solid fa-route text-ocean-cyan text-2xl mt-1"></i>
+                    <div>
+                        <h4 class="font-display font-bold text-white text-sm uppercase mb-1">Недалеко от берега</h4>
+                        <p class="text-gray-400 font-light text-xs">Держите береговую линию в поле зрения.</p>
+                    </div>
+                </div>
+                <!-- Карточка 7 -->
+                <div class="glass-water p-6 rounded-2xl flex items-start gap-4 reveal sound-hover" style="transition-delay: 300ms;">
+                    <i class="fa-solid fa-child-reaching text-ocean-cyan text-2xl mt-1"></i>
+                    <div>
+                        <h4 class="font-display font-bold text-white text-sm uppercase mb-1">Дети со взрослыми</h4>
+                        <p class="text-gray-400 font-light text-xs">Строгий контроль на воде.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass-water p-8 rounded-[2rem] reveal border-white/5 relative overflow-hidden group sound-hover">
+                <div class="absolute inset-0 bg-ocean-cyan/5 group-hover:bg-ocean-cyan/10 transition-colors"></div>
+                <h4 class="font-display font-bold text-white text-lg uppercase mb-4 relative z-10"><i class="fa-solid fa-circle-exclamation text-sun-glow mr-2"></i> Дополнительные советы</h4>
+                <ul class="text-gray-300 font-light text-sm space-y-3 relative z-10 list-none">
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-ocean-cyan mt-1"></i> Берите с собой питьевую воду и защиту от солнца (крем, кепка).</li>
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-ocean-cyan mt-1"></i> Телефон лучше держать в надежном гермочехле.</li>
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-ocean-cyan mt-1"></i> При любом резком ухудшении погоды (ветер, волны) немедленно возвращайтесь к берегу.</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -604,194 +520,6 @@
     </footer>
 
     <!-- Скрипты -->
-    <script>
-        // --- 1. АУДИО ДВИЖОК: ПРЕМИАЛЬНЫЙ БУЛЬК, ТИХОЕ МОРЕ, ЧАЙКИ ---
-        let soundEnabled = false;
-        let seagullsInterval = null;
-
-        // Загружаем реальные звуки высокого качества 
-        const sounds = {
-            bloop: new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'),
-            ocean: new Audio('https://assets.mixkit.co/active_storage/sfx/1195/1195-preview.mp3'),
-            seagulls: new Audio('https://assets.mixkit.co/active_storage/sfx/2384/2384-preview.mp3')
-        };
-
-        // Настройки 
-        sounds.ocean.loop = true;
-        sounds.ocean.volume = 0; 
-        sounds.seagulls.volume = 0.05; // Чайки еле слышно 
-
-        // Идеальное зацикливание моря (убирает щелчок в конце mp3)
-        sounds.ocean.addEventListener('timeupdate', function() {
-            let buffer = 0.5; // за полсекунды до конца
-            if(this.currentTime > this.duration - buffer) {
-                this.currentTime = 0.1;
-                this.play();
-            }
-        });
-
-        function playBloopSound() {
-            if (!soundEnabled) return;
-            const drop = sounds.bloop.cloneNode();
-            drop.volume = 0.3; // Сочный, не громкий бульк
-            drop.play().catch(e => {});
-        }
-
-        function playSeagulls() {
-            if (!soundEnabled) return;
-            sounds.seagulls.play().catch(e => {});
-            const nextTime = Math.random() * 15000 + 15000;
-            seagullsInterval = setTimeout(playSeagulls, nextTime);
-        }
-
-        function fadeAudioIn(audioNode, targetVolume, duration) {
-            let step = targetVolume / (duration / 50);
-            let current = 0;
-            audioNode.volume = 0;
-            audioNode.play().catch(e => {});
-            let fader = setInterval(() => {
-                current += step;
-                if (current >= targetVolume) {
-                    audioNode.volume = targetVolume;
-                    clearInterval(fader);
-                } else {
-                    audioNode.volume = current;
-                }
-            }, 50);
-        }
-
-        function fadeAudioOut(audioNode, duration) {
-            let step = audioNode.volume / (duration / 50);
-            let current = audioNode.volume;
-            let fader = setInterval(() => {
-                current -= step;
-                if (current <= 0) {
-                    audioNode.volume = 0;
-                    audioNode.pause();
-                    clearInterval(fader);
-                } else {
-                    audioNode.volume = current;
-                }
-            }, 50);
-        }
-
-        function toggleSound() {
-            if (soundEnabled) {
-                fadeAudioOut(sounds.ocean, 1000);
-                clearTimeout(seagullsInterval);
-                soundEnabled = false;
-            } else {
-                fadeAudioIn(sounds.ocean, 0.02, 1000); // Громкость моря 2% (очень тихий фон)
-                soundEnabled = true;
-                playSeagulls();
-            }
-            updateSoundIcons();
-            playBloopSound();
-        }
-
-        function updateSoundIcons() {
-            const deskIcon = document.getElementById('sound-icon-desktop');
-            const mobIcon = document.getElementById('sound-icon-mobile');
-            
-            [deskIcon, mobIcon].forEach(icon => {
-                if(!icon) return;
-                icon.classList.remove('animate-pulse-icon');
-                
-                if(soundEnabled) {
-                    icon.classList.remove('fa-volume-xmark');
-                    icon.classList.add('fa-volume-high', 'text-ocean-cyan');
-                } else {
-                    icon.classList.remove('fa-volume-high', 'text-ocean-cyan');
-                    icon.classList.add('fa-volume-xmark');
-                }
-            });
-        }
-
-        // --- 2. ВИЗУАЛ И ЛОГИКА ---
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            document.querySelectorAll('.sound-hover').forEach(el => {
-                el.addEventListener('mouseenter', playBloopSound);
-            });
-
-            window.addEventListener('scroll', () => {
-                requestAnimationFrame(() => {
-                    let maxScroll = Math.max(1, document.body.scrollHeight - window.innerHeight);
-                    let scrollY = window.scrollY;
-                    let depthRatio = Math.min(Math.max(scrollY / maxScroll, 0), 1);
-                    document.documentElement.style.setProperty('--depth', depthRatio);
-
-                    const navbar = document.getElementById('navbar');
-                    if (scrollY > 50) {
-                        navbar.classList.add('bg-ocean-deep/80', 'backdrop-blur-xl', 'border-b', 'border-white/5');
-                        navbar.classList.remove('py-4');
-                        navbar.classList.add('py-2');
-                    } else {
-                        navbar.classList.remove('bg-ocean-deep/80', 'backdrop-blur-xl', 'border-b', 'border-white/5');
-                        navbar.classList.add('py-4');
-                        navbar.classList.remove('py-2');
-                    }
-                });
-            }, { passive: true });
-
-            const container = document.getElementById('bubbles');
-            if (container) {
-                for(let i=0; i<25; i++) {
-                    let bubble = document.createElement('div');
-                    bubble.classList.add('bubble');
-                    let size = Math.random() * 12 + 4; 
-                    let left = Math.random() * 100; 
-                    let duration = Math.random() * 12 + 12; 
-                    let delay = Math.random() * 15; 
-                    bubble.style.width = `${size}px`;
-                    bubble.style.height = `${size}px`;
-                    bubble.style.left = `${left}vw`;
-                    bubble.style.animationDuration = `${duration}s`;
-                    bubble.style.animationDelay = `${delay}s`;
-                    container.appendChild(bubble);
-                }
-            }
-
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuIcon = document.getElementById('menu-icon');
-            let isMenuOpen = false;
-
-            function toggleMenu() {
-                isMenuOpen = !isMenuOpen;
-                if (isMenuOpen) {
-                    mobileMenu.classList.remove('translate-x-full');
-                    menuIcon.classList.remove('fa-bars');
-                    menuIcon.classList.add('fa-xmark');
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    mobileMenu.classList.add('translate-x-full');
-                    menuIcon.classList.remove('fa-xmark');
-                    menuIcon.classList.add('fa-bars');
-                    document.body.style.overflow = '';
-                }
-                playBloopSound();
-            }
-
-            if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMenu);
-            document.querySelectorAll('.mobile-link').forEach(link => {
-                link.addEventListener('click', () => { if(isMenuOpen) toggleMenu(); });
-            });
-
-            const revealElements = document.querySelectorAll('.reveal');
-            revealElements.forEach(el => el.classList.add('reveal-hidden'));
-
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.remove('reveal-hidden');
-                        obs.unobserve(entry.target);
-                    }
-                });
-            }, { root: null, rootMargin: '0px', threshold: 0.1 });
-            
-            revealElements.forEach(el => observer.observe(el));
-        });
-    </script>
+    <script type="module" src="./src/script.js"></script>
 </body>
 </html>
