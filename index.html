@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MY SUP_SUN | Атмосферные SUP-прогулки в Лазаревском</title>
+    <meta name="description" content="Встречайте рассветы и провожайте закаты на сапбордах в Лазаревском! Атмосферные групповые сап-прогулки на Чёрном море, SUP-йога, обучение и прокат.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MY SUP_SUN | Атмосферные SUP-прогулки">
+    <meta property="og:description" content="Атмосферные групповые сап-прогулки, SUP-йога и прокат в Лазаревском.">
+    <meta property="og:type" content="website">
+    
+    <!-- Акцентные и современные шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&family=Unbounded:wght@300;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Подключение иконок и стилей -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <script type="module" crossorigin src="/my-sup-sun-website2/assets/index-C5Z1cCGy.js"></script>
+  <link rel="stylesheet" crossorigin href="/my-sup-sun-website2/assets/index-ErQFWlxA.css">
+</head>
+<body class="font-sans antialiased selection:bg-ocean-cyan selection:text-ocean-deep" id="body">
+
+    <!-- Фоны -->
+    <div class="ocean-bg"></div>
+    <div class="depth-overlay"></div>
+    <div class="sun-rays"></div>
+    <div class="bubbles-container" id="bubbles"></div>
+
+    <!-- Навигация -->
+    <nav class="fixed w-full z-50 transition-all duration-500 py-4 glass-water border-x-0 border-t-0 rounded-none" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-14">
+                <!-- Логотип -->
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer sound-hover" onclick="window.scrollTo(0,0)">
+                    <div class="font-display font-black text-xl md:text-2xl tracking-tighter text-white z-50 relative">MY<span class="text-ocean-cyan">SUP_</span>SUN</div>
+                </div>
+                
+                <!-- Десктопное меню -->
+                <div class="hidden lg:flex space-x-10">
+                    <a href="#tours" class="text-xs font-bold text-gray-400 hover:text-white transition-colors tracking-[0.2em] uppercase relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-[2px] after:bg-ocean-cyan hover:after:w-full after:transition-all after:duration-300 sound-hover">Прогулки</a>
+                    <a href="#yoga" class="text-xs font-bold text-gray-400 hover:text-white transition-colors tracking-[0.2em] uppercase relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-[2px] after:bg-ocean-cyan hover:after:w-full after:transition-all after:duration-300 sound-hover">SUP-Йога</a>
+                    <a href="#services" class="text-xs font-bold text-gray-400 hover:text-white transition-colors tracking-[0.2em] uppercase relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-[2px] after:bg-ocean-cyan hover:after:w-full after:transition-all after:duration-300 sound-hover">Прокат</a>
+                </div>
+                
+                <!-- Кнопка связи и Звук -->
+                <div class="hidden lg:flex items-center gap-6">
+                    <button id="sound-toggle" class="text-gray-400 hover:text-white transition-colors group relative" onclick="toggleSound()" title="Включить атмосферу моря">
+                        <i class="fa-solid fa-volume-xmark text-lg animate-pulse-icon" id="sound-icon-desktop"></i>
+                    </button>
+                    <a href="tel:+79636928378" class="relative group px-6 py-3 sound-hover">
+                        <div class="absolute inset-0 bg-ocean-cyan rounded-full blur opacity-20 group-hover:opacity-50 transition duration-500"></div>
+                        <div class="relative bg-white/5 border border-white/10 text-white px-6 py-2.5 rounded-full font-bold text-sm whitespace-nowrap group-hover:bg-ocean-cyan group-hover:text-ocean-deep group-hover:border-ocean-cyan transition-all duration-500 backdrop-blur-md shadow-[0_0_15px_rgba(0,240,255,0.05)]">
+                            +7 963 692 83 78
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Бургер меню (Мобилка) -->
+                <div class="lg:hidden z-50 relative flex items-center gap-4">
+                    <button class="text-gray-400 hover:text-white transition-colors" onclick="toggleSound()">
+                        <i class="fa-solid fa-volume-xmark text-lg animate-pulse-icon" id="sound-icon-mobile"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-white p-2 focus:outline-none sound-hover">
+                        <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Мобильное меню -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-ocean-deep/98 backdrop-blur-3xl flex flex-col items-center justify-center transition-transform duration-500 translate-x-full">
+        <div class="flex flex-col space-y-8 text-center w-full px-6">
+            <a href="#tours" class="mobile-link sound-hover text-xl font-display font-bold text-white hover:text-ocean-cyan transition-colors uppercase tracking-[0.2em]">Прогулки</a>
+            <a href="#yoga" class="mobile-link sound-hover text-xl font-display font-bold text-white hover:text-ocean-cyan transition-colors uppercase tracking-[0.2em]">SUP-Йога</a>
+            <a href="#services" class="mobile-link sound-hover text-xl font-display font-bold text-white hover:text-ocean-cyan transition-colors uppercase tracking-[0.2em]">Прокат</a>
+            <a href="#safety" class="mobile-link sound-hover text-xl font-display font-bold text-white hover:text-ocean-cyan transition-colors uppercase tracking-[0.2em]">Безопасность</a>
+            
+            <a href="tel:+79636928378" class="relative group inline-block mt-8 sound-hover">
+                <div class="absolute inset-0 bg-ocean-cyan rounded-full blur opacity-40"></div>
+                <div class="relative bg-ocean-deep border border-ocean-cyan/50 text-white px-8 py-4 rounded-full font-bold text-lg whitespace-nowrap inline-block">
+                    +7 (963) 692-83-78
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Главный экран (Hero) -->
+    <section class="relative min-h-[100svh] flex flex-col items-center justify-center pt-24 overflow-hidden">
+        <!-- Премиальный видео-фон -->
+        <div class="absolute inset-0 z-0 overflow-hidden bg-ocean-deep">
+            <video 
+                autoplay 
+                muted 
+                loop 
+                playsinline 
+                preload="metadata"
+                aria-hidden="true"
+                poster="/my-sup-sun-website2/assets/hero_bg-86asiAXS.png"
+                class="absolute inset-0 w-full h-full object-cover"
+                style="pointer-events: none; opacity: 0.85;"
+            >
+                <source src="/my-sup-sun-website2/assets/Seaside_hotel_video_202604211944-DY_Nwws3.mp4" type="video/mp4">
+            </video>
+            <!-- Premium Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-ocean-deep/40 via-ocean-deep/60 to-ocean-deep pointer-events-none"></div>
+            <!-- Мягкая виньетка -->
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(4,11,20,0.7)_100%)] pointer-events-none"></div>
+        </div>
+
+        <div class="relative z-10 w-full px-4 max-w-5xl mx-auto flex flex-col items-center justify-center text-center mt-6 md:mt-0">
+            
+            <!-- ПРЕМИАЛЬНОЕ ГРАДИЕНТНОЕ СОЛНЦЕ (Минимализм) -->
+            <div class="mb-8 md:mb-12 relative flex justify-center items-center group cursor-default sound-hover">
+                <!-- Глубокая аура -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-[#FF5500] to-sun-glow rounded-full blur-[50px] opacity-40 group-hover:opacity-70 transition duration-1000 animate-pulse-slow"></div>
+                
+                <!-- Само солнце -->
+                <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-full z-10 overflow-hidden transition-transform duration-700 group-hover:scale-105 bg-gradient-to-b from-[#FFF5D1] via-[#FFD700] to-[#FF3300] shadow-[0_0_60px_rgba(255,215,0,0.4)]">
+                    <!-- Внутренний блик для объема (эффект стекла) -->
+                    <div class="absolute inset-0 rounded-full border border-white/50 pointer-events-none mix-blend-overlay"></div>
+                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent"></div>
+                </div>
+            </div>
+            
+            <!-- Журнальная типографика -->
+            <div class="inline-block border border-white/10 bg-white/5 backdrop-blur-md px-5 py-2 rounded-full mb-6 sound-hover">
+                <span class="text-[9px] md:text-[10px] text-gray-300 tracking-[0.3em] uppercase font-bold flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-sun-glow rounded-full animate-ping"></span>
+                    Пляж «Морской бриз»
+                </span>
+            </div>
+
+            <h1 class="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-[1.2] uppercase tracking-tight drop-shadow-2xl max-w-4xl mx-auto">
+                SUP-прогулки в Лазаревском <br class="hidden md:block">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-sun-core to-sun-glow">на рассвете, закате</span> <br class="hidden md:block">
+                и в самый красивый момент моря
+            </h1>
+            
+            <p class="text-sm md:text-base text-gray-300 mb-12 font-light max-w-2xl mx-auto leading-relaxed drop-shadow-md opacity-90">
+                <strong class="font-display text-white tracking-widest text-xs uppercase">MY SUP SUN</strong> — прогулки на сапах, обучение, прокат, SUP-йога и фотосъёмка на воде. Спокойный маршрут, инструктор рядом и атмосфера Чёрного моря, которую хочется сохранить.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 w-full max-w-2xl mx-auto">
+                <a href="#tours" class="relative group w-full sm:w-auto sound-hover">
+                    <div class="absolute inset-0 bg-gradient-to-r from-ocean-cyan to-ocean-surface rounded-full blur opacity-30 group-hover:opacity-60 transition duration-700"></div>
+                    <div class="relative bg-white/5 backdrop-blur-xl border border-white/20 text-white px-8 py-4 md:px-10 md:py-5 rounded-full font-display font-bold text-xs tracking-[0.2em] uppercase group-hover:bg-white group-hover:text-ocean-deep transition-all duration-500 block text-center shadow-xl">
+                        Выбрать прогулку
+                    </div>
+                </a>
+                
+                <a href="https://t.me/pavel_galkin_lab" target="_blank" class="relative group w-full sm:w-auto sound-hover">
+                    <div class="absolute inset-0 bg-[#2AABEE] rounded-full blur opacity-20 group-hover:opacity-40 transition duration-700"></div>
+                    <div class="relative bg-white/5 backdrop-blur-xl border border-white/10 text-white px-8 py-4 md:px-8 md:py-5 rounded-full font-display font-bold text-xs tracking-[0.1em] uppercase hover:border-[#2AABEE] transition-all duration-500 flex items-center justify-center gap-3">
+                        <i class="fa-brands fa-telegram text-lg text-[#2AABEE]"></i>
+                        Telegram
+                    </div>
+                </a>
+
+                <a href="tel:+79636928378" class="relative group w-full sm:w-auto sound-hover">
+                    <div class="absolute inset-0 bg-white rounded-full blur opacity-10 group-hover:opacity-20 transition duration-700"></div>
+                    <div class="relative bg-white/5 backdrop-blur-xl border border-white/10 text-white px-8 py-4 md:px-8 md:py-5 rounded-full font-display font-bold text-xs tracking-[0.1em] uppercase hover:border-white transition-all duration-500 flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-phone text-sm"></i>
+                        Позвонить
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Скролл индикатор -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 opacity-50 hover:opacity-100 transition-opacity hidden sm:flex cursor-pointer sound-hover" onclick="document.getElementById('tours').scrollIntoView({behavior: 'smooth'})">
+            <span class="text-[8px] tracking-[0.4em] uppercase font-bold text-ocean-cyan">Вниз</span>
+            <div class="relative w-[1px] h-12 bg-white/10 overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1/2 bg-ocean-cyan animate-[bubble_2s_linear_infinite]"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок главных продуктов: Прогулки -->
+    <section id="tours" class="py-20 lg:py-32 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16 md:mb-24 reveal text-center lg:text-left">
+                <h2 class="font-display text-4xl sm:text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tight drop-shadow-lg">Магия <br><span class="text-white/20">Времени</span></h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-sun-glow to-transparent mx-auto lg:mx-0"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
+                <!-- Рассвет -->
+                <div class="glass-water rounded-[2rem] md:rounded-[3rem] overflow-hidden group reveal relative min-h-[450px] md:min-h-[600px] flex flex-col justify-end p-8 md:p-14 sound-hover">
+                    <!-- Абстрактный градиент восхода -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-ocean-deep to-[#071a33] opacity-90 transition-transform duration-1000 group-hover:scale-105"></div>
+                    <div class="absolute -bottom-20 -right-20 w-64 h-64 rounded-full bg-sun-glow/20 blur-[60px] group-hover:bg-sun-glow/40 transition-colors duration-700"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-ocean-deep via-ocean-deep/60 to-transparent"></div>
+                    
+                    <div class="relative z-10 transition-transform duration-700 group-hover:-translate-y-4">
+                        <div class="w-16 h-16 rounded-full glass-water flex items-center justify-center mb-6 text-sun-glow text-2xl border-sun-glow/30 shadow-[0_0_30px_rgba(255,215,0,0.1)] group-hover:rotate-45 transition-all duration-700">
+                            <i class="fa-solid fa-sun"></i>
+                        </div>
+                        <h3 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4 uppercase tracking-tight">Энергия Утра</h3>
+                        <p class="text-gray-300 mb-8 font-light text-sm leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity">
+                            Гладкая вода, тишина и лучи восходящего солнца. Проснись вместе с морем.
+                        </p>
+                        <div class="flex justify-between items-end border-t border-white/10 pt-6">
+                            <div>
+                                <p class="text-[9px] text-ocean-cyan uppercase tracking-[0.3em] mb-2 font-bold">Групповой выход</p>
+                                <p class="font-display text-2xl text-white">от 1200 ₽</p>
+                            </div>
+                            <button class="w-12 h-12 rounded-full bg-white/5 border border-white/20 text-white flex items-center justify-center group-hover:bg-sun-glow group-hover:text-ocean-deep group-hover:border-sun-glow transition-all duration-500">
+                                <i class="fa-solid fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-500"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Закат -->
+                <div class="glass-water rounded-[2rem] md:rounded-[3rem] overflow-hidden group reveal relative min-h-[450px] md:min-h-[600px] flex flex-col justify-end p-8 md:p-14 lg:mt-16 sound-hover">
+                    <!-- Абстрактный градиент заката -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-ocean-deep to-[#2a0e0b] opacity-90 transition-transform duration-1000 group-hover:scale-105"></div>
+                    <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-[#FF5500]/20 blur-[60px] group-hover:bg-[#FF5500]/40 transition-colors duration-700"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-ocean-deep via-ocean-deep/60 to-transparent"></div>
+                    
+                    <div class="relative z-10 transition-transform duration-700 group-hover:-translate-y-4">
+                        <div class="w-16 h-16 rounded-full glass-water flex items-center justify-center mb-6 text-[#FF5500] text-2xl border-[#FF5500]/30 shadow-[0_0_30px_rgba(255,85,0,0.1)] group-hover:-rotate-12 transition-all duration-700">
+                            <i class="fa-solid fa-moon"></i>
+                        </div>
+                        <h3 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4 uppercase tracking-tight">Золотой Час</h3>
+                        <p class="text-gray-300 mb-8 font-light text-sm leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity">
+                            Мягкий свет уходящего солнца для эстетичных фото и релакса на воде.
+                        </p>
+                        <div class="flex justify-between items-end border-t border-white/10 pt-6">
+                            <div>
+                                <p class="text-[9px] text-[#FF5500] uppercase tracking-[0.3em] mb-2 font-bold">Релакс на воде</p>
+                                <p class="font-display text-2xl text-white">1200 - 1700 ₽</p>
+                            </div>
+                            <button class="w-12 h-12 rounded-full bg-white/5 border border-white/20 text-white flex items-center justify-center group-hover:bg-[#FF5500] group-hover:text-white group-hover:border-[#FF5500] transition-all duration-500">
+                                <i class="fa-solid fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-500"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок SUP Йога -->
+    <section id="yoga" class="py-20 lg:py-32 relative overflow-hidden z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                <div class="w-full lg:w-1/2 reveal">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-water text-[9px] font-bold tracking-[0.3em] uppercase mb-6 text-ocean-cyan border-ocean-cyan/20">
+                        <i class="fa-solid fa-droplet animate-bounce"></i> Полная перезагрузка
+                    </div>
+                    <h2 class="font-display text-4xl sm:text-5xl md:text-7xl font-black mb-8 leading-[1.1] uppercase drop-shadow-xl text-white">
+                        Баланс<br>
+                        <span class="text-gradient-abyss">На Воде</span>
+                    </h2>
+                    <p class="text-gray-300 text-sm md:text-lg font-light leading-relaxed mb-10 opacity-90">
+                        Йога на SUP-бордах — это полная перезагрузка. Вода мягко амортизирует движения, а шум волн заменяет музыку в наушниках.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="glass-water p-6 rounded-2xl flex items-start gap-4 sound-hover">
+                            <div class="w-10 h-10 rounded-full bg-ocean-cyan/10 flex items-center justify-center text-ocean-cyan shrink-0 mt-1">
+                                <i class="fa-solid fa-yin-yang text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-bold text-white mb-1 uppercase text-sm tracking-wide">Сила Кора</h4>
+                                <p class="text-gray-400 font-light text-xs md:text-sm">Включаются глубокие мышцы-стабилизаторы, которые обычно спят на коврике.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Абстрактная водная рябь вместо фото -->
+                <div class="w-full lg:w-1/2 reveal mt-12 lg:mt-0 px-4 sm:px-0 flex justify-center">
+                    <div class="relative w-64 h-64 flex items-center justify-center">
+                        <div class="absolute inset-0 rounded-full border border-ocean-cyan/40 animate-ripple"></div>
+                        <div class="absolute inset-0 rounded-full border border-[#0055FF]/40 animate-ripple" style="animation-delay: 1.3s;"></div>
+                        <div class="absolute inset-0 rounded-full border border-white/20 animate-ripple" style="animation-delay: 2.6s;"></div>
+                        <!-- Центральный элемент -->
+                        <div class="w-20 h-20 rounded-full glass-water shadow-[0_0_40px_rgba(0,240,255,0.2)] flex items-center justify-center z-10 sound-hover">
+                            <i class="fa-solid fa-om text-3xl text-ocean-cyan opacity-80"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок Услуг и Проката -->
+    <section id="services" class="py-20 lg:py-32 relative z-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16 md:mb-24 reveal text-center">
+                <h2 class="font-display text-4xl sm:text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tight">Форматы <br><span class="text-white/20">Отдыха</span></h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-ocean-cyan to-transparent mx-auto"></div>
+                <p class="text-gray-400 mt-6 max-w-2xl mx-auto font-light">Прокат, занятия с инструктором, утренние и вечерние прогулки. Подходит для детей и взрослых.</p>
+                <a href="./public/images/services_poster.png" target="_blank" class="inline-flex items-center gap-2 mt-6 text-xs text-ocean-cyan uppercase tracking-widest font-bold hover:text-white transition-colors">
+                    <i class="fa-regular fa-image"></i> Открыть афишу услуг
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Прокат (Хит) -->
+                <div class="glass-water p-8 md:p-10 rounded-[2rem] reveal flex flex-col relative transform lg:-translate-y-8 border-ocean-cyan/20 shadow-[0_0_30px_rgba(0,240,255,0.05)] group hover:-translate-y-4 lg:hover:-translate-y-12 transition-transform duration-700 z-10 sound-hover" style="background: rgba(0, 240, 255, 0.02);">
+                    <div class="absolute top-6 right-6 bg-ocean-cyan text-ocean-deep px-4 py-1.5 rounded-full text-[9px] font-black tracking-[0.3em] uppercase shadow-[0_0_15px_rgba(0,240,255,0.3)]">Хит</div>
+                    <div class="text-white text-4xl mb-6 drop-shadow-lg group-hover:scale-110 transition-transform duration-500"><i class="fa-solid fa-water"></i></div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2 uppercase">Прокат SUP-досок</h3>
+                    <div class="font-display text-3xl font-black text-ocean-cyan mb-6">от 600 ₽ <span class="text-xs font-normal text-gray-400 font-sans tracking-widest uppercase">/ час</span></div>
+                    <p class="text-gray-300 font-light mb-8 flex-grow text-sm">Катание в своем темпе по акватории пляжа. Доступна доска на двоих.</p>
+                    <button class="w-full bg-ocean-cyan text-ocean-deep py-4 rounded-full font-black tracking-[0.2em] uppercase text-xs shadow-[0_0_20px_rgba(0,240,255,0.2)] hover:bg-white transition-colors duration-500">Арендовать</button>
+                </div>
+
+                <!-- Обучение -->
+                <div class="glass-water p-8 md:p-10 rounded-[2rem] reveal flex flex-col group hover:-translate-y-4 transition-transform duration-700 sound-hover">
+                    <div class="text-[#FFD700] text-4xl mb-6 opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"><i class="fa-solid fa-compass"></i></div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2 uppercase">С инструктором</h3>
+                    <div class="font-display text-3xl font-black text-white mb-6">2000 ₽ <span class="text-xs font-normal text-gray-500 font-sans tracking-widest uppercase">/ час</span></div>
+                    <p class="text-gray-400 font-light mb-8 flex-grow text-sm">Обучение с нуля. Ставим технику, ловим баланс (для взрослых и детей от 7 лет).</p>
+                    <button class="w-full bg-white/5 border border-white/10 text-white py-4 rounded-full font-bold group-hover:bg-[#FFD700] group-hover:text-ocean-deep group-hover:border-[#FFD700] transition-all tracking-[0.2em] uppercase text-xs">Выбрать</button>
+                </div>
+
+                <!-- Сертификаты -->
+                <div class="glass-water p-8 md:p-10 rounded-[2rem] reveal flex flex-col group hover:-translate-y-4 transition-transform duration-700 sound-hover">
+                    <div class="text-[#0055FF] text-4xl mb-6 opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"><i class="fa-solid fa-gift"></i></div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2 uppercase">Сертификаты</h3>
+                    <div class="font-display text-xl font-black text-white mb-6">Подарочный <br>формат</div>
+                    <p class="text-gray-400 font-light mb-8 flex-grow text-sm">Премиальные подарочные сертификаты на любой формат отдыха.</p>
+                    <button class="w-full bg-white/5 border border-white/10 text-white py-4 rounded-full font-bold group-hover:bg-[#0055FF] group-hover:text-white group-hover:border-[#0055FF] transition-all tracking-[0.2em] uppercase text-xs">Заказать</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Фотоуслуги -->
+    <section class="py-20 lg:py-32 overflow-hidden relative z-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
+                <!-- Абстрактные фокусы камер вместо фото -->
+                <div class="w-full lg:w-1/2 reveal flex justify-center gap-6">
+                    <div class="w-32 h-48 md:w-40 md:h-56 glass-water rounded-[2rem] flex items-center justify-center border-white/5 sound-hover group">
+                        <i class="fa-solid fa-camera text-4xl text-white/30 group-hover:text-ocean-cyan transition-colors duration-500"></i>
+                    </div>
+                    <div class="w-32 h-48 md:w-40 md:h-56 glass-water rounded-[2rem] flex items-center justify-center border-ocean-cyan/20 shadow-[0_0_30px_rgba(0,240,255,0.05)] transform translate-y-8 sound-hover group">
+                        <i class="fa-solid fa-drone text-4xl text-ocean-cyan/50 group-hover:text-ocean-cyan transition-colors duration-500"></i>
+                        <i class="fa-solid fa-helicopter text-4xl text-ocean-cyan/50 group-hover:text-ocean-cyan transition-colors duration-500"></i> <!-- Fallback icon -->
+                    </div>
+                </div>
+                <!-- Текст -->
+                <div class="w-full lg:w-1/2 reveal">
+                    <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 leading-[1.1] uppercase drop-shadow-lg">
+                        Оставь <br>телефон <br><span class="text-white/20">на берегу</span>
+                    </h2>
+                    <p class="text-gray-300 font-light text-sm md:text-lg mb-10 leading-relaxed opacity-90">
+                        Сложный свет требует хорошей оптики. Сохраняй эмоции в 4K, не рискуя уронить собственный смартфон в море.
+                    </p>
+                    <div class="space-y-6">
+                        <div class="border-l-2 border-white/20 pl-6 group cursor-default sound-hover">
+                            <h4 class="font-display font-bold text-white mb-2 uppercase text-xs md:text-sm tracking-widest group-hover:text-sun-glow transition-colors">Своя техника в сейфе</h4>
+                            <p class="text-gray-400 font-light text-xs md:text-sm">Бесплатно выдаем герметичные чехлы для самостоятельной съемки.</p>
+                        </div>
+                        <div class="border-l-2 border-ocean-cyan pl-6 group cursor-default sound-hover">
+                            <h4 class="font-display font-bold text-ocean-cyan mb-2 uppercase text-xs md:text-sm tracking-widest">PRO Съемка</h4>
+                            <p class="text-white font-light text-xs md:text-sm">Организация съемок на воде с профессиональной техникой.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок Безопасности -->
+    <section id="safety" class="py-20 lg:py-32 relative z-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 md:mb-24 reveal">
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Безопасность <br><span class="text-white/20">на воде</span></h2>
+                <div class="w-16 h-1 bg-white/20 mx-auto mt-6 rounded-full mb-8"></div>
+                <a href="./public/images/safety_poster.png" target="_blank" class="inline-flex items-center gap-2 text-xs text-ocean-cyan uppercase tracking-widest font-bold hover:text-white transition-colors">
+                    <i class="fa-regular fa-file-image"></i> Открыть памятку
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+                <!-- Карточка 1 -->
+                <div class="glass-water p-6 rounded-2xl flex items-start gap-4 reveal sound-hover">
+                    <i class="fa-solid fa-life-ring text-ocean-cyan text-2xl mt-1"></i>
+                    <div>
+                        <h4 class="font-display font-bold text-white text-sm uppercase mb-1">Наденьте жилет</h4>
+                        <p class="text-gray-400 font-light text-xs">Обязательная экипировка на воде.</p>
+                    </div>
+                </div>
+                <!-- Карточка 2 -->
+                <div class="glass-water p-6 rounded-2xl flex items-start gap-4 reveal sound-hover" style="transition-delay: 50ms;">
+                    <i class="fa-solid fa-link text-ocean-cyan text-2xl mt-1"></i>
+                    <div>
+                        <h4 class="font-display font-bold text-white text-sm uppercase mb-1">Пристегните лиш</h4>
+                        <p class="text-gray-400 font-light text-xs">Чтобы доска не уплыла от вас.</p>
+                    </div>
+                </div>
+                <!-- Карточка 3 -->
+                <div class="glass-water p-6 rounded-2xl flex items-start gap-4 reveal sound-hover" style="transition-delay: 100ms;">
+                    <i class="fa-solid fa-cloud-sun text-ocean-cyan text-2xl mt-1"></i>
+                    <div>
+                        <h4 class="font-display font-bold text-white text-sm uppercase mb-1">Проверьте погоду</h4>
+                        <p class="text-gray-400 font-light text-xs">При ухудшении сразу к берегу.</p>
+                    </div>
+                </div>
+                <!-- Карточка 4 -->
+                <div class="glass-water p-6 rounded-2xl flex items-start gap-4 reveal sound-hover" style="transition-delay: 150ms;">
+                    <i class="fa-solid fa-magnifying-glass text-ocean-cyan text-2xl mt-1"></i>
+                    <div>
+                        <h4 class="font-display font-bold text-white text-sm uppercase mb-1">Снаряжение</h4>
+                        <p class="text-gray-400 font-light text-xs">Осмотрите весло и доску.</p>
+                    </div>
+                </div>
+                <!-- Карточка 5 -->
+                <div class="glass-water p-6 rounded-2xl flex items-start gap-4 reveal sound-hover" style="transition-delay: 200ms;">
+                    <i class="fa-solid fa-map-location-dot text-ocean-cyan text-2xl mt-1"></i>
+                    <div>
+                        <h4 class="font-display font-bold text-white text-sm uppercase mb-1">Маршрут</h4>
+                        <p class="text-gray-400 font-light text-xs">Сообщите, куда плывете.</p>
+                    </div>
+                </div>
+                <!-- Карточка 6 -->
+                <div class="glass-water p-6 rounded-2xl flex items-start gap-4 reveal sound-hover" style="transition-delay: 250ms;">
+                    <i class="fa-solid fa-route text-ocean-cyan text-2xl mt-1"></i>
+                    <div>
+                        <h4 class="font-display font-bold text-white text-sm uppercase mb-1">Недалеко от берега</h4>
+                        <p class="text-gray-400 font-light text-xs">Держите береговую линию в поле зрения.</p>
+                    </div>
+                </div>
+                <!-- Карточка 7 -->
+                <div class="glass-water p-6 rounded-2xl flex items-start gap-4 reveal sound-hover" style="transition-delay: 300ms;">
+                    <i class="fa-solid fa-child-reaching text-ocean-cyan text-2xl mt-1"></i>
+                    <div>
+                        <h4 class="font-display font-bold text-white text-sm uppercase mb-1">Дети со взрослыми</h4>
+                        <p class="text-gray-400 font-light text-xs">Строгий контроль на воде.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass-water p-8 rounded-[2rem] reveal border-white/5 relative overflow-hidden group sound-hover">
+                <div class="absolute inset-0 bg-ocean-cyan/5 group-hover:bg-ocean-cyan/10 transition-colors"></div>
+                <h4 class="font-display font-bold text-white text-lg uppercase mb-4 relative z-10"><i class="fa-solid fa-circle-exclamation text-sun-glow mr-2"></i> Дополнительные советы</h4>
+                <ul class="text-gray-300 font-light text-sm space-y-3 relative z-10 list-none">
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-ocean-cyan mt-1"></i> Берите с собой питьевую воду и защиту от солнца (крем, кепка).</li>
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-ocean-cyan mt-1"></i> Телефон лучше держать в надежном гермочехле.</li>
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-ocean-cyan mt-1"></i> При любом резком ухудшении погоды (ветер, волны) немедленно возвращайтесь к берегу.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="pt-20 lg:pt-32 pb-8 border-t border-white/5 relative overflow-hidden z-10 bg-ocean-deep backdrop-blur-3xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 md:mb-24 reveal overflow-hidden flex justify-center w-full opacity-20">
+                <h2 class="font-display text-[13vw] sm:text-[11vw] md:text-[9vw] lg:text-[7vw] leading-none font-black text-transparent bg-clip-text bg-gradient-to-b from-white/20 to-transparent select-none uppercase tracking-tighter whitespace-nowrap cursor-default w-full">
+                    MY SUP SUN
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12 relative z-10">
+                <!-- О нас -->
+                <div class="reveal text-center sm:text-left">
+                    <div class="font-display font-black text-2xl tracking-tighter text-white mb-4">MY<span class="text-ocean-cyan">SUP_</span>SUN</div>
+                    <p class="text-gray-400 font-light text-sm mb-6 leading-relaxed max-w-sm mx-auto sm:mx-0">
+                        Клуб SUP-серфинга в Лазаревском. Переосмысляем отдых на воде.
+                    </p>
+                    <a href="https://vk.link/my_sup_sun_lazarevskoye" target="_blank" class="inline-flex items-center justify-center w-12 h-12 rounded-full glass-water hover:bg-ocean-cyan hover:text-ocean-deep hover:border-ocean-cyan transition-all text-white shadow-lg sound-hover">
+                        <i class="fa-brands fa-vk text-xl"></i>
+                    </a>
+                </div>
+
+                <!-- Контакты -->
+                <div class="reveal text-center sm:text-left md:flex md:flex-col md:items-end">
+                    <div>
+                        <h4 class="font-display font-bold text-white mb-6 uppercase tracking-widest text-xs">Локация & Связь</h4>
+                        <ul class="space-y-5 text-gray-300 font-light text-sm">
+                            <li class="flex flex-col sm:flex-row items-center sm:items-start gap-3 group cursor-default">
+                                <i class="fa-solid fa-location-crosshairs sm:mt-1 text-ocean-cyan"></i>
+                                <span>Лазаревское, ул. Одоевского, 93А<br/><span class="text-xs text-gray-500 mt-1 block">Пляж «Морской бриз»</span></span>
+                            </li>
+                            <li class="flex flex-col sm:flex-row items-center sm:items-start gap-3 group cursor-default">
+                                <i class="fa-regular fa-clock text-ocean-cyan sm:mt-1"></i>
+                                <span>08:00 - 19:00 <br/><span class="text-[9px] text-ocean-cyan border border-ocean-cyan/30 px-2 py-0.5 rounded-full mt-2 inline-block uppercase tracking-widest">Сезон с июня</span></span>
+                            </li>
+                            <li class="flex flex-col sm:flex-row items-center sm:items-start gap-3 pt-2">
+                                <i class="fa-solid fa-phone text-ocean-cyan sm:mt-1.5"></i>
+                                <a href="tel:+79636928378" class="text-white hover:text-ocean-cyan transition-colors font-display font-bold text-lg sound-hover">+7 (963) 692-83-78</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Карта на всю ширину в самом низу -->
+            <div class="reveal w-full h-64 md:h-80 glass-water rounded-[2rem] flex items-center justify-center relative overflow-hidden group border-white/5 hover:border-ocean-cyan/30 transition-colors duration-500 sound-hover mb-16">
+                <iframe 
+                    src="https://maps.google.com/maps?q=Лазаревское,%20ул.%20Одоевского,%2093А&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                    width="100%" 
+                    height="100%" 
+                    frameborder="0" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    aria-hidden="false" 
+                    tabindex="0"
+                    loading="lazy"
+                    class="absolute inset-0 mix-blend-luminosity opacity-40 group-hover:opacity-90 transition-opacity duration-700 filter grayscale group-hover:grayscale-0">
+                </iframe>
+                <div class="absolute inset-0 bg-ocean-cyan/5 group-hover:bg-transparent transition-colors pointer-events-none"></div>
+            </div>
+
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-[9px] text-gray-600 font-bold uppercase tracking-[0.2em] gap-4 md:gap-0 text-center md:text-left">
+                <p>&copy; 2026 MY SUP_SUN. МОРЕ ЖДЕТ.</p>
+                <a href="#" class="hover:text-white transition-colors sound-hover">Политика конфиденциальности</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+</body>
+</html>
