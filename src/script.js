@@ -132,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const container = document.getElementById('bubbles');
     if (container) {
+        const fragment = document.createDocumentFragment();
         for(let i=0; i<25; i++) {
             let bubble = document.createElement('div');
             bubble.classList.add('bubble');
@@ -144,8 +145,9 @@ document.addEventListener('DOMContentLoaded', () => {
             bubble.style.left = `${left}vw`;
             bubble.style.animationDuration = `${duration}s`;
             bubble.style.animationDelay = `${delay}s`;
-            container.appendChild(bubble);
+            fragment.appendChild(bubble);
         }
+        container.appendChild(fragment);
     }
 
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
