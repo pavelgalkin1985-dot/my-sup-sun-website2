@@ -110,6 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
         el.addEventListener('mouseenter', playBloopSound);
     });
 
+    const navbar = document.getElementById('navbar');
+
     window.addEventListener('scroll', () => {
         requestAnimationFrame(() => {
             let maxScroll = Math.max(1, document.body.scrollHeight - window.innerHeight);
@@ -117,15 +119,16 @@ document.addEventListener('DOMContentLoaded', () => {
             let depthRatio = Math.min(Math.max(scrollY / maxScroll, 0), 1);
             document.documentElement.style.setProperty('--depth', depthRatio);
 
-            const navbar = document.getElementById('navbar');
-            if (scrollY > 50) {
-                navbar.classList.add('bg-ocean-deep/80', 'backdrop-blur-xl', 'border-b', 'border-white/5');
-                navbar.classList.remove('py-4');
-                navbar.classList.add('py-2');
-            } else {
-                navbar.classList.remove('bg-ocean-deep/80', 'backdrop-blur-xl', 'border-b', 'border-white/5');
-                navbar.classList.add('py-4');
-                navbar.classList.remove('py-2');
+            if (navbar) {
+                if (scrollY > 50) {
+                    navbar.classList.add('bg-ocean-deep/80', 'backdrop-blur-xl', 'border-b', 'border-white/5');
+                    navbar.classList.remove('py-4');
+                    navbar.classList.add('py-2');
+                } else {
+                    navbar.classList.remove('bg-ocean-deep/80', 'backdrop-blur-xl', 'border-b', 'border-white/5');
+                    navbar.classList.add('py-4');
+                    navbar.classList.remove('py-2');
+                }
             }
         });
     }, { passive: true });
