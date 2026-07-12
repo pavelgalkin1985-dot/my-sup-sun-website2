@@ -37,30 +37,27 @@ function playSeagulls() {
     seagullsInterval = setTimeout(playSeagulls, nextTime);
 }
 
-function fadeAudioIn(audioNode, targetVolume, duration) {
-    let step = targetVolume / (duration / 50);
-    let current = 0;
-    audioNode.volume = 0;
-    audioNode.play().catch(e => {});
-    let fader = setInterval(() => {
-        current += step;
-        if (current >= targetVolume) {
-            audioNode.volume = targetVolume;
-            clearInterval(fader);
-        } else {
-            audioNode.volume = current;
-        }
-    }, 50);
-}
-
-function fadeAudioOut(audioNode, duration) {
-    let step = audioNode.volume / (duration / 50);
-    let current = audioNode.volume;
-    let fader = setInterval(() => {
-        current -= step;
-        if (current <= 0) {
-            audioNode.volume = 0;
+function fadeAudio(audioNode, targetVolume, duration) {
+    const startVolume = audioNode.volume;
+    if (targetVolume > startVolume) {
+        audioNode.play().catch(e => {});
+    }
+    if (duration <= 0 || startVolume === targetVolume) {
+        audioNode.volume = targetVolume;
+        if (targetVolume === 0) {
             audioNode.pause();
+        }
+        return;
+    }
+    const step = (targetVolume - startVolume) / (duration / 50);
+    let current = startVolume;
+    const fader = setInterval(() => {
+        current += step;
+        if ((step > 0 && current >= targetVolume) || (step < 0 && current <= targetVolume)) {
+            audioNode.volume = targetVolume;
+            if (targetVolume === 0) {
+                audioNode.pause();
+            }
             clearInterval(fader);
         } else {
             audioNode.volume = current;
@@ -70,11 +67,11 @@ function fadeAudioOut(audioNode, duration) {
 
 function toggleSound() {
     if (soundEnabled) {
-        fadeAudioOut(sounds.ocean, 1000);
+        fadeAudio(sounds.ocean, 0, 1000);
         clearTimeout(seagullsInterval);
         soundEnabled = false;
     } else {
-        fadeAudioIn(sounds.ocean, 0.02, 1000); // Громкость моря 2% (очень тихий фон)
+        fadeAudio(sounds.ocean, 0.02, 1000); // Громкость моря 2% (очень тихий фон)
         soundEnabled = true;
         playSeagulls();
     }
