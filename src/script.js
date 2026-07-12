@@ -27,12 +27,12 @@ function playBloopSound() {
     if (!soundEnabled) return;
     const drop = sounds.bloop.cloneNode();
     drop.volume = 0.3; // Сочный, не громкий бульк
-    drop.play().catch(e => {});
+    drop.play().catch(e => console.error("Error playing bloop sound:", e));
 }
 
 function playSeagulls() {
     if (!soundEnabled) return;
-    sounds.seagulls.play().catch(e => {});
+    sounds.seagulls.play().catch(e => console.error("Error playing seagulls sound:", e));
     const nextTime = Math.random() * 15000 + 15000;
     seagullsInterval = setTimeout(playSeagulls, nextTime);
 }
@@ -41,7 +41,7 @@ function fadeAudioIn(audioNode, targetVolume, duration) {
     let step = targetVolume / (duration / 50);
     let current = 0;
     audioNode.volume = 0;
-    audioNode.play().catch(e => {});
+    audioNode.play().catch(e => console.error("Error playing faded-in audio:", e));
     let fader = setInterval(() => {
         current += step;
         if (current >= targetVolume) {
